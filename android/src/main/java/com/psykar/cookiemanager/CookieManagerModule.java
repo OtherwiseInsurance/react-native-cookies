@@ -72,6 +72,22 @@ public class CookieManagerModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getString(String url, Callback callback) throws URISyntaxException, IOException {
+        URI uri = new URI(url);
+
+        Map<String, List<String>> cookieMap = this.cookieHandler.get(uri, new HashMap());
+
+        List<String> cookieList = cookieMap.get("Cookie");
+        String result = null;
+
+        if (cookieList != null) {
+            result = cookieList.get(0);
+        }
+
+        callback.invoke(null, result);
+    }
+
+    @ReactMethod
     public void clearAll(final Callback callback) {
         this.cookieHandler.clearCookies(new Callback() {
             public void invoke(Object... args) {
