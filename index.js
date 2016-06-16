@@ -21,6 +21,7 @@ var functions = [
     'set',
     'setFromResponse',
     'get',
+    'getString',
     'getAll',
     'clearAll'
 ];
